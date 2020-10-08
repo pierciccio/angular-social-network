@@ -1,0 +1,21 @@
+<div *ngIf="messages">
+    <mat-card>
+        <div *ngFor="let message of messages">
+            <div class="avatar">
+                <a>
+                    <img src="{{ url + 'get-image-user/' + message.emitter.image }}" 
+                    *ngIf="message.emitter.image">
+                    <img src="assets/user.png" *ngIf="!message.emitter.image" >
+                </a>
+                <a mat-button [routerLink]="['/profile', message.emitter._id]">
+                    {{message.emitter.firstname}} {{message.emitter.lastname}}
+                </a>
+            </div>
+            <mat-card class="tex">
+                <h3>
+                    <strong> {{message.text}} </strong>
+                </h3>
+            </mat-card>            
+        </div>
+    </mat-card>
+</div>

@@ -1,0 +1,46 @@
+<mat-card>
+  <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+    <mat-form-field>
+      <input matInput name="firstname" ngModel type="text" [(ngModel)]="user.firstname"
+      #firstnameInput="ngModel" placeholder="firstname" required firstname>
+      <mat-error *ngIf="firstnameInput.invalid">Please enter a valid firstname</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput name="lastname" ngModel type="text" [(ngModel)]="user.lastname"
+      #lastnameInput="ngModel" placeholder="lastname" required lastname>
+      <mat-error *ngIf="lastnameInput.invalid">Please enter a valid lastname</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput name="age" ngModel type="number" [(ngModel)]="user.age"
+      #ageInput="ngModel" placeholder="age" required age>
+      <mat-error *ngIf="ageInput.invalid">Please enter a valid age</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput name="nickname" ngModel type="text" [(ngModel)]="user.nickname"
+      #nicknameInput="ngModel" placeholder="nickname" required nickname>
+      <mat-error *ngIf="nicknameInput.invalid">Please enter a valid nickname</mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field>
+      <input matInput name="email" ngModel type="email" [(ngModel)]="user.email"
+      #emailInput="ngModel" placeholder="email" required email>
+      <mat-error *ngIf="emailInput.invalid">Please enter a valid email</mat-error>
+    </mat-form-field>
+
+    <mat-form-field >
+      <input matInput [type]="hide ? 'password' : 'text'" name="password" ngModel [(ngModel)]="user.password"
+      placeholder="password" #passwordInput="ngModel" required password>
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="passwordInput.invalid"> Please enter password</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button type="submit" color="accent">Register</button>
+  </form>
+</mat-card>
+  

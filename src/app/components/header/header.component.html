@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+    <span>
+        <a *ngIf="identity" mat-icon-button [routerLink]="['/timeline']">
+            <mat-icon>home</mat-icon> 
+        </a>
+        <a *ngIf="identity" mat-button [routerLink]="['/users']">Users</a>
+        <a *ngIf="identity" mat-button [routerLink]="['/messages']">Messages</a>
+    </span>
+  
+    <!-- This fills the remaining space of the current row -->
+    <span class="example-fill-remaining-space"></span>
+  
+    <span>
+        <a *ngIf="!identity" mat-button [routerLink]="['/register']">Register</a>
+        <a *ngIf="!identity" mat-button [routerLink]="['/login']" >Login</a>
+        <a *ngIf="identity" mat-button [routerLink]="['/profile', identity._id]" >Profile</a>
+        <a *ngIf="identity" mat-button (click)="logout()" >Logout</a>
+    </span>
+  </mat-toolbar>

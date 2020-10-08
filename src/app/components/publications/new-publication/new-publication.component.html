@@ -1,0 +1,13 @@
+<mat-card>
+    <form #newPubForm="ngForm" (ngSubmit)="savePublication(newPubForm, $event)">
+        <textarea matInput name="text" #text="ngModel" placeholder="What are you thinking?"
+        [(ngModel)]="publication.text" class="form-control"></textarea>
+        <mat-error *ngIf="text.invalid">The text of the publication is mandatory</mat-error>
+        
+        <p>
+            <input type="file" placeholder="Upload image" (change)="filechangeEvent($event)">
+        </p>
+
+        <button type="submit" value="Send" mat-raised-button color="primary" >Save</button>
+    </form>
+</mat-card>

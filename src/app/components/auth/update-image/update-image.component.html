@@ -1,0 +1,15 @@
+<mat-card>
+    <form #imageForm="ngForm" (ngSubmit)="updateImage()" >
+        <div>
+            <img src="{{url + 'get-image-user/' + user.image}}" class="img-edit">
+        </div>
+        <p>
+            <label>choose your image</label>
+            <input type="file" (change)="fileChangeEvent($event)">
+        </p>
+        <button type="submit" mat-raised-button color="accent">Update</button>
+    </form>
+</mat-card>
+
+
+  

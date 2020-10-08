@@ -1,0 +1,21 @@
+<mat-card>
+    <form #formNew="ngForm" (ngSubmit)="newMessage(formNew)">
+        <mat-form-field>
+            <mat-label>For</mat-label>
+            <mat-select name="receiver" #receiver="ngModel" 
+            [(ngModel)]="message.receiver" *ngIf="follows" required>
+                <mat-option *ngFor="let follow of follows" value="{{follow.followed._id}}" >
+                    {{follow.followed.firstname}} {{follow.followed.lastname}} ({{follow.followed.nickname}})
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    
+        <mat-form-field>
+            <mat-label>Message</mat-label>
+            <textarea matInput name="text" #text="ngModel" 
+            [(ngModel)]="message.text" required></textarea>
+            <mat-error *ngIf="text.invalid && text.touched">Insert Message</mat-error>
+        </mat-form-field> 
+        <button mat-raised-button color="accent" type="submit">Send</button>
+    </form>
+</mat-card>

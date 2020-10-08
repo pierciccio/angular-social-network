@@ -1,0 +1,46 @@
+<div >
+    <button mat-raised-button color="primary" class="refresh"
+    (click)="refresh($event)" class="refresh">refresh</button>
+    <mat-card>
+        <div *ngFor="let publication of publications" >
+            <mat-card>
+                <div>
+                    <span class="date">
+                        {{(publication.create_at | amFromUnix) | amLocale: 'it' | amTimeAgo}}
+                    </span>
+                </div>
+
+                <h4 >
+                    {{ publication.text }}    
+                </h4>
+
+                <button mat-fab color="warn" class="del"
+                (click)="deletePublication(publication._id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+
+                <div *ngIf="publication.file != 'null'">
+                    <button mat-raised-button color="accent"
+                    (click)="showThisImage(publication._id)" 
+                    *ngIf="showImage != publication._id">
+                    show</button>
+    
+                    <button mat-raised-button color="primary"
+                    (click)="hideThisImage(publication._id)" 
+                    *ngIf="showImage == publication._id">
+                    hide</button>
+                </div>
+                <div *ngIf="publication.file != 'null' && showImage == publication._id">    
+                    <img src="{{ url + 'get-image-pub/' + publication.file }}" >
+                </div>
+            </mat-card><br>
+        </div>
+        <div *ngIf="publications && publications.length">
+            <p>
+                <button mat-raised-button color="warn" 
+                (click)="viewMore()" *ngIf="!noMore">See more posts</button>
+            </p>
+        </div>
+    </mat-card>    
+</div>
+

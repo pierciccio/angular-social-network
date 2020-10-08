@@ -1,0 +1,10 @@
+.avatar img{
+    width: 200px;
+    height: 200px;
+}
+
+mat-card {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}

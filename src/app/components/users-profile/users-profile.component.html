@@ -1,0 +1,56 @@
+<mat-card *ngIf="user">
+    <mat-grid-list cols="3" rowHeight="1:1">
+        
+        <mat-grid-tile> 
+            <div>
+                <h2> {{user.firstname}} {{user.lastname}} Profile</h2>  
+                <br>
+                <div>
+                    <button mat-raised-button color="accent" *ngIf="!following" 
+                    (click)="followUser(user._id)">Follow</button>
+                    <button mat-raised-button color="accent" *ngIf="following" 
+                    (click)="unfollowUser(user._id)" 
+                    (mouseenter)="mouseEnter(user._id)" 
+                    (mouseleave)="mouseLeave()" 
+                    [class.btn-danger]="user._id == followUserOver">
+                     <span *ngIf="user._id == followUserOver; else following">
+                        Unfollow
+                     </span> 
+                     <ng-template #following>
+                        Following
+                     </ng-template>
+                    </button>
+                </div>
+            </div>
+        </mat-grid-tile>      
+
+        <mat-grid-tile>
+            <div class="avatar">
+                <img src="{{ url + 'get-image-user/' + user.image }}" *ngIf="user.image">
+                <img src="assets/user.png" *ngIf="!user.image">
+           </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <div *ngIf="stats">
+                <a [routerLink]="['/following', user._id, 1]"
+                mat-raised-button color = "warn">
+                Following
+                <span>{{stats.following}}</span>
+                </a>
+                <br><br>
+                <a [routerLink]="['/followed', user._id, 1]" 
+                mat-raised-button color = "warn">
+                Followed
+                <span>{{stats.followed}}</span>
+                </a>            
+            </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+</mat-card>
+
+<app-users-publications></app-users-publications>
+
+
+
+

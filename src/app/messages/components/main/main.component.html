@@ -1,0 +1,19 @@
+<mat-card>
+    <mat-grid-list cols="3" rowHeight="3:1">
+        <mat-grid-tile>
+            <a [routerLink]="['send']" 
+            mat-raised-button color="primary">Send Message</a>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <a [routerLink]="['received']"
+            mat-raised-button color="primary">Message Received</a>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <a [routerLink]="['sent']"
+            mat-raised-button color="primary">Message Sent</a>
+        </mat-grid-tile>
+    </mat-grid-list>     
+</mat-card>
+<router-outlet></router-outlet>

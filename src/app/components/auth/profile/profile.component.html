@@ -1,0 +1,51 @@
+<mat-card *ngIf="user">
+    <mat-grid-list cols="3" rowHeight="1:1">
+        
+        <mat-grid-tile> 
+            <div>
+                <h2>Welcome {{user.firstname}} {{user.lastname}}</h2>  
+                <br>
+                <a mat-raised-button color="primary" 
+                [routerLink]="['/user-edit']"> Update proflie</a>
+                <br><br>
+            </div>
+        </mat-grid-tile>      
+
+        <mat-grid-tile>
+            <div class="avatar">
+                <img src="{{ url + 'get-image-user/' + user.image }}" *ngIf="user.image">
+                <img src="assets/user.png" *ngIf="!user.image">
+                <br>
+                <a mat-raised-button color="accent" [routerLink]="['/update-image']">Change image profile</a>
+            </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <div *ngIf="stats">
+                <a [routerLink]="['/following', user._id, 1]"
+                mat-raised-button color = "warn">
+                Following
+                <span>{{stats.following}}</span>
+                </a>
+                <br><br>
+                <a [routerLink]="['/followed', user._id, 1]" 
+                mat-raised-button color = "warn">
+                Followed
+                <span>{{stats.followed}}</span>
+                </a>            
+            </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+</mat-card> <br>
+
+<div *ngIf="user">
+    <app-new-publication>
+        [user]="user._id"
+    </app-new-publication>
+</div>
+
+<div *ngIf="user">
+    <app-list-publication>
+        [user]="user._id"
+    </app-list-publication>
+</div>

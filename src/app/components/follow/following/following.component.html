@@ -1,0 +1,52 @@
+<h1>following {{user.firstname}}</h1>
+<div *ngIf="following">
+    <div *ngFor="let follow of following">
+        <mat-card >
+            <div class="avatar">
+                <a>
+                    <img src="{{ url + 'get-image-user/' + follow.followed.image }}" 
+                    *ngIf="follow.followed.image">
+                    <img src="assets/user.png" *ngIf="!follow.followed.image" >
+                </a>
+    
+            </div>
+            <div >
+                <p>
+                    <a [routerLink]="['/users-profile', follow.followed._id]" mat-button>
+                        {{ follow.followed.firstname }} {{ follow.followed.lastname}}
+                     </a>
+                </p>
+                <p> {{ follow.followed.nickname }} </p>
+            </div>
+            <div >
+                <button mat-raised-button color="primary" 
+                *ngIf="follows.indexOf(follow.user._id) < 0 " 
+                (click)="followUser(follow.user._id)"> Following </button>
+                <button mat-raised-button color="accent" 
+                *ngIf="follows.indexOf(follow.user._id) >= 0" 
+                (mouseenter)="mouseEnter(follow.user._id)" 
+                (mouseleave)="mouseLeave(follow.user._id)" 
+                [class.btn-danger]="follow.user._id == followUserOver" 
+                (click)="unfollowUser(follow.user._id)">                 
+                    <span *ngIf="follow.user._id == followUserOver; else following">
+                        Unfollow
+                    </span>
+                    <ng-template #following>
+                        <span>
+                            Following
+                        </span>
+                     </ng-template>
+    
+                </button>
+            </div>
+        </mat-card> <br>
+    </div>
+</div>
+<ul class="pagination pull-right">
+    <li>
+        <a mat-button color="accent" [routerLink]="['/following', userPageId ,prev_page]">Previous</a>
+    </li>
+    <li>
+        <a mat-button color="accent" [routerLink]="['/following', userPageId ,next_page]">Next</a>
+    </li>
+</ul>

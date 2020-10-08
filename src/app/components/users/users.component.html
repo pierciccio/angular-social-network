@@ -1,0 +1,52 @@
+<h1>Users</h1>
+<div *ngFor="let user of users">
+    <mat-card >
+        <div class="use">
+            <div class="avatar">
+                <a [routerLink]="['/users-profile', user._id]">
+                    <img src="assets/user.png" 
+                    *ngIf="!user.image" >
+                    <img src="{{ url + 'get-image-user/' + user.image }}" 
+                    *ngIf="user.image">                   
+                </a>
+            </div>
+            <div >
+                <p >
+                    <a [routerLink]="['/users-profile', user._id]"  mat-button>
+                        {{ user.firstname }} {{ user.lastname}}
+                     </a>
+                </p>
+                <p> {{ user.nickname }} </p>
+            </div>
+    
+            <div class="pull-right">
+                <button mat-raised-button color="primary" 
+                *ngIf="follows.indexOf(user._id) < 0 " 
+                (click)="followUser(user._id)">Following</button>
+                <button mat-raised-button color="accent" 
+                *ngIf="follows.indexOf(user._id) >= 0" 
+                (mouseenter)="mouseEnter(user._id)" 
+                (mouseleave)="mouseLeave(user._id)" 
+                [class.btn-danger]="user._id == followUserOver" 
+                (click)="unfollowUser(user._id)">                
+                    <span *ngIf="user._id == followUserOver; else following">
+                        Unfollow
+                    </span>
+                    <ng-template #following>
+                        <span>
+                            Following
+                        </span>
+                     </ng-template>
+                </button>
+            </div>
+        </div>
+    </mat-card><br>     
+</div>
+<ul >
+    <li>
+        <a mat-button [routerLink]="['/users', prev_page]">Previous</a>
+    </li>
+    <li>
+        <a mat-button [routerLink]="['/users', next_page]">Next</a>
+    </li>
+</ul>
